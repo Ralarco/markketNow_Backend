@@ -7,6 +7,7 @@ const pool = new Pool({
     user: 'postgres',
     password: 'bARR3Xb70Cmdf9gOUAla',
     database: 'railway',
+    ssl: true,
     allowExitOnIdle: true
 })
 
