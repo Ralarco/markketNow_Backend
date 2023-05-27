@@ -3,10 +3,10 @@ const bcrypt = require('bcryptjs')
 
 //CONEXION A BASE DE DATOS
 const pool = new Pool({
-    host: 'containers-us-west-64.railway.app',
-    user: 'postgres',
-    password: 'bARR3Xb70Cmdf9gOUAla',
-    database: 'railway',
+    host: 'dpg-choc56u7avja2dfth1ag-a.oregon-postgres.render.com/marketnow',
+    user: 'marketnow_admin',
+    password: 'lMZzZs58VTUwStO7gkXxHcMUPo2gaHOs',
+    database: 'marketnow',
     ssl: true,
     allowExitOnIdle: true
 })
