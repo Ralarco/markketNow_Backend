@@ -5,16 +5,16 @@ dotenv.config();
 
 //CONEXION A BASE DE DATOS
 const pool = new Pool({
-    connectionString: process.env.DBConfigLink,
+    /* connectionString: process.env.DBConfigLink,
     ssl: {
         rejectUnauthorized: false
-    }
-    /* host: 'dpg-choc56u7avja2dfth1ag-a.oregon-postgres.render.com/marketnow',
+    } */
+    host: 'dpg-choc56u7avja2dfth1ag-a/marketnow',
     user: 'marketnow_admin',
     password: 'lMZzZs58VTUwStO7gkXxHcMUPo2gaHOs',
     database: 'marketnow',
     ssl: true,
-    allowExitOnIdle: true */
+    allowExitOnIdle: true
 })
 
 //REGISTRO DE NUEVOS USUARIOS
