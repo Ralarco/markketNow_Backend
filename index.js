@@ -11,15 +11,11 @@ const { secretKey } = require("./secretkey")
 app.listen(3000, console.log("Servidor encendido"))
 app.use(express.json())
 app.use(cors({
-    origin: "https://marketnow-backend2.onrender.com",
+    origin: "https://marketnow.onrender.com",
     headers: ["Content-Type"],
     credentials: true,
 }));
-app.use(function(req, res, next) {
-    res.set("Access-Control-Allow-Origin", "https://marketnow-backend2.onrender.com");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+
 // función middleware para servir archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
