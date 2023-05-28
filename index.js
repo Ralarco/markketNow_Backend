@@ -13,6 +13,7 @@ app.use(express.json())
 app.use(cors({
     origin: "https://marketnow.onrender.com",
     headers: ["Content-Type"],
+    allowedHeaders: ['Authorization'],
     credentials: true,
 }));
 
