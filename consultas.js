@@ -9,7 +9,7 @@ const pool = new Pool({
     ssl: {
         rejectUnauthorized: false
     } */
-    host: 'containers-us-west-64.railway.app:6547/railway',
+    host: 'containers-us-west-64.railway.app',
     user: 'postgres',
     password: 'bARR3Xb70Cmdf9gOUAla',
     database: 'railway',
