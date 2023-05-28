@@ -5,7 +5,7 @@ dotenv.config();
 
 //CONEXION A BASE DE DATOS
 const pool = new Pool({
-    /* connectionString: process.env.DBConfigLink,
+    /* connectionString: process.env.DBConnLink,
     ssl: {
         rejectUnauthorized: false
     } */
@@ -14,7 +14,6 @@ const pool = new Pool({
     password: 'bARR3Xb70Cmdf9gOUAla',
     database: 'railway',
     port: 6547,
-    ssl: true,
     allowExitOnIdle: true
 })
 
