@@ -9,10 +9,10 @@ const pool = new Pool({
     ssl: {
         rejectUnauthorized: false
     } */
-    host: 'dpg-choc56u7avja2dfth1ag-a/marketnow',
-    user: 'marketnow_admin',
-    password: 'lMZzZs58VTUwStO7gkXxHcMUPo2gaHOs',
-    database: 'marketnow',
+    host: 'containers-us-west-64.railway.app:6547/railway',
+    user: 'postgres',
+    password: 'bARR3Xb70Cmdf9gOUAla',
+    database: 'railway',
     ssl: true,
     allowExitOnIdle: true
 })
