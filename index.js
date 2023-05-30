@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const app = express();
 const cors = require('cors');
 const jwt = require("jsonwebtoken")
@@ -13,9 +12,7 @@ app.use(express.json())
 app.use(cors({
     origin: "https://marketnow.onrender.com",
     credentials: true,
-}));
-// función middleware para servir archivos estáticos
-app.use(express.static(path.join(__dirname, 'public')));
+}))
 
 
 //--------------METODOS POST----------------
@@ -50,14 +47,12 @@ app.post("/login", async (req, res) => {
 
 //AGREGA PRODUCTO
 app.post("/producto", async (req, res) => {
-
     try{
-        const { nombre, descripcion, precio, imagen } =req.body
-        await addProducto(nombre, descripcion, precio, imagen)
-        res.send("Producto ha sido creado con exito")
-    } catch(err){
-        console.log(err)
-        res.status(500).send(err)
+        const { nombre, precio, descripcion, imagen, usuarioid} = req.body
+        await addProducto(nombre, precio, descripcion, imagen, usuarioid)
+        res.send("Producto agregado con éxito")
+    } catch (error) {
+        res.status(500).send(error)
     }
 
 })
@@ -89,9 +84,9 @@ app.post("/compras", async (req, res) => {
 //ACTUALIZA DATOS DE USUARIO
 app.put("/usuario/:id", async (req, res) => {
     try{
-        const { id } = req.params
+        const { usuarioid } = req.params
         const { nombre, direccion, password } = req.query
-        await modificarUsuario(nombre, direccion, password, id)
+        await modificarUsuario(nombre, direccion, password, usuarioid)
         res.send("Usuario modificado con éxito")
     } catch (error) {
         res.status(500).send(error)
