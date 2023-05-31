@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const jwt = require("jsonwebtoken")
-const { addUser, addProducto, addFavorito, addCompra, validarCredenciales, leerProductos, leerProductosFavoritos, leerCompras, leerComprasDetalle, leerProductosUsuarios, modificarUsuario, eliminarFavorito } = require('./consultas')
+const { addUser, addProducto, addFavorito, addCompra, validarCredenciales, leerProductos, leerProductosFavoritos, leerCompras, leerComprasDetalle, leerProductosUsuarios, modificarUsuario, eliminarFavorito, eliminarMiProducto } = require('./consultas')
 const { verificarCredenciales, verificarToken } = require('./middelware')
 const { secretKey } = require("./secretkey")
 
@@ -175,6 +175,17 @@ app.delete("/favoritos/:id", async (req, res) => {
         const { id } = req.params
         await eliminarFavorito(id)
         res.send("Favorito eliminado con éxito")
+    } catch (error) {
+        res.status(500).send(error)
+    }
+  })
+
+//ELIMINA PRODUCTOS DE MIS PRODUCTOS
+app.delete("/producto/:id", async (req, res) => {
+    try{
+        const { id } = req.params
+        await eliminarMiProducto(id)
+        res.send("Producto eliminado con éxito")
     } catch (error) {
         res.status(500).send(error)
     }
