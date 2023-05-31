@@ -91,6 +91,16 @@ const leerProductosFavoritos = async ( usuarioid ) => {
 
 }
 
+//EXTRAE LOS PRODUCTOS DE CADA USUARIO
+const leerProductosUsuarios = async ( usuarioid ) => {
+
+    const value = [usuarioid]
+    const consulta = "SELECT * FROM productos WHERE usuarioid = $1"
+    const { rows } = await pool.query(consulta, value)
+    return rows
+
+}
+
 //EXTRAE COMPRAS POR USUARIO
 const leerCompras = async ( usuarioid ) => {
 
@@ -105,7 +115,7 @@ const leerCompras = async ( usuarioid ) => {
 const leerComprasDetalle = async ( compraid ) => {
 
     const value = [compraid]
-    const consulta = "SELECT * FROM compras WHERE compraid = $1"
+    const consulta = "SELECT productos FROM compras WHERE compraid = $1"
     const { rows } = await pool.query(consulta, value)
     return rows
 
@@ -113,14 +123,24 @@ const leerComprasDetalle = async ( compraid ) => {
 
 
 //ACTUALIZA INFORMACION DE USUARIO
-const modificarUsuario = async (nombre, email, direccion, password, usuarioid) => {
+const modificarUsuario = async (nombre, direccion, password, id) => {
 
-    const consulta = "UPDATE usuarios SET nombre = $1, email = $2, direccion = $3, password = $4 WHERE usuarioid = $5"
-    const passwordEncriptada = bcrypt.hashSync(password)
-    const values = [nombre, email, direccion, passwordEncriptada, usuarioid]
-    const result = await pool.query(consulta, values)
-    console.log(result)
- 
+    if(!password){
+
+        const consulta = "UPDATE usuarios SET nombre = $1, direccion = $2 WHERE usuarioid = $3"
+        const values = [nombre, direccion, id]
+        const result = await pool.query(consulta, values)
+        console.log(result)
+
+    } else {
+
+        const consulta = "UPDATE usuarios SET nombre = $1, direccion = $2, password = $3 WHERE usuarioid = $4"
+        const passwordEncriptada = bcrypt.hashSync(password)
+        const values = [nombre, direccion, passwordEncriptada, id]
+        const result = await pool.query(consulta, values)
+        console.log(result)
+        
+    }
 }
 
 //ELIMINA FAVORITO
@@ -130,4 +150,11 @@ const eliminarFavorito = async (id) => {
     const result = await pool.query(consulta, values)
 }
 
-module.exports = { addUser, addProducto, addFavorito, addCompra, validarCredenciales, extraeUsuario, leerProductos, leerProductosFavoritos, leerCompras, leerComprasDetalle, modificarUsuario, eliminarFavorito }
+//ELIMINA MI PRODUCTO
+const eliminarMiProducto = async (id) => {
+    const consulta = "DELETE FROM productos WHERE productoid = $1"
+    const values = [id]
+    const result = await pool.query(consulta, values)
+}
+
+module.exports = { addUser, addProducto, addFavorito, addCompra, validarCredenciales, extraeUsuario, leerProductos, leerProductosFavoritos, leerCompras, leerComprasDetalle, leerProductosUsuarios, modificarUsuario, eliminarFavorito, eliminarMiProducto }
