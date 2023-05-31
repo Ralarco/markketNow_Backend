@@ -76,6 +76,7 @@ app.post("/compras", async (req, res) => {
         res.send("Compra efectuada con éxito")
     } catch (error) {
         res.status(500).send(error)
+        console.log(error)
     }
   })
 
