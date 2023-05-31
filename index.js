@@ -10,7 +10,7 @@ const { secretKey } = require("./secretkey")
 app.listen(3000, console.log("Servidor encendido"))
 app.use(express.json())
 app.use(cors({
-    origin: "https://marketnow.onrender.com",
+    origin: 'https://marketnow.onrender.com',
     credentials: true,
 }))
 
