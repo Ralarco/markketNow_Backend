@@ -117,6 +117,18 @@ app.get("/productos", async (req, res) => {
  }
 })
 
+//OBTIENE PRODUCTOS DE CADA USUARIO
+app.get("/productos/:id", async (req, res) => {
+    try {
+       const { id } = req.params
+       const productos = await leerProductosUsuarios(id)
+       res.json(productos)
+    } catch (error) {
+       console.log(error)
+       res.status(error.code || 500).send(error)
+    }
+   })
+
 //OBTIENE PRODUCTOS FAVORITOS
 app.get("/favoritos/:id", async (req, res) => {
     try {
