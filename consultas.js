@@ -115,7 +115,7 @@ const leerCompras = async ( usuarioid ) => {
 const leerComprasDetalle = async ( compraid ) => {
 
     const value = [compraid]
-    const consulta = "SELECT * FROM compras WHERE compraid = $1"
+    const consulta = "SELECT productos FROM compras WHERE compraid = $1"
     const { rows } = await pool.query(consulta, value)
     return rows
 
@@ -150,4 +150,11 @@ const eliminarFavorito = async (id) => {
     const result = await pool.query(consulta, values)
 }
 
-module.exports = { addUser, addProducto, addFavorito, addCompra, validarCredenciales, extraeUsuario, leerProductos, leerProductosFavoritos, leerCompras, leerComprasDetalle, leerProductosUsuarios, modificarUsuario, eliminarFavorito }
+//ELIMINA MI PRODUCTO
+const eliminarMiProducto = async (id) => {
+    const consulta = "DELETE FROM productos WHERE productoid = $1"
+    const values = [id]
+    const result = await pool.query(consulta, values)
+}
+
+module.exports = { addUser, addProducto, addFavorito, addCompra, validarCredenciales, extraeUsuario, leerProductos, leerProductosFavoritos, leerCompras, leerComprasDetalle, leerProductosUsuarios, modificarUsuario, eliminarFavorito, eliminarMiProducto }
