@@ -45,7 +45,7 @@ const addFavorito = async (usuarioid, productoid) => {
 const addCompra = async (usuarioid, fecha_compra, total, productos) => {
 
     const consulta = "INSERT INTO compras (usuarioid, fecha_compra, total, productos) VALUES ($1, $2, $3, $4)"
-    const values = [usuarioid, fecha_compra, total, productos]
+    const values = [usuarioid, fecha_compra, total, JSON.stringify(productos)]
     const result = await pool.query( consulta, values)
     console.log("Compra agregada con exito")
 }
