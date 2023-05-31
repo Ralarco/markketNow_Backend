@@ -91,6 +91,16 @@ const leerProductosFavoritos = async ( usuarioid ) => {
 
 }
 
+//EXTRAE LOS PRODUCTOS DE CADA USUARIO
+const leerProductosUsuarios = async ( usuarioid ) => {
+
+    const value = [usuarioid]
+    const consulta = "SELECT * FROM productos WHERE usuarioid = $1"
+    const { rows } = await pool.query(consulta, value)
+    return rows
+
+}
+
 //EXTRAE COMPRAS POR USUARIO
 const leerCompras = async ( usuarioid ) => {
 
@@ -130,4 +140,4 @@ const eliminarFavorito = async (id) => {
     const result = await pool.query(consulta, values)
 }
 
-module.exports = { addUser, addProducto, addFavorito, addCompra, validarCredenciales, extraeUsuario, leerProductos, leerProductosFavoritos, leerCompras, leerComprasDetalle, modificarUsuario, eliminarFavorito }
+module.exports = { addUser, addProducto, addFavorito, addCompra, validarCredenciales, extraeUsuario, leerProductos, leerProductosFavoritos, leerCompras, leerComprasDetalle, leerProductosUsuarios, modificarUsuario, eliminarFavorito }
